@@ -30,10 +30,10 @@ class TokenManager
   {
     $headers = apache_request_headers();
 
-   $aaa = '';
+   $aaa = 'headers';
 
     foreach ($headers as $header => $value) {
-      $aaa .=  "$header: $value <br />\n";
+      $aaa .=  $header .': ' . $value . ', ';
   }
 
    // $aaa = 'nada';
@@ -101,7 +101,7 @@ class TokenManager
       }
     } else {
       return array(
-        "error" => "No token present cccc",
+        "error" => "No token present dddd",
         "aaa" => $aaa
       );
     }
