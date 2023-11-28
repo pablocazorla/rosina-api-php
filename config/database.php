@@ -5,14 +5,16 @@ class Database
 
     // specify your own database credentials
     private $host = "localhost";
+
+    /*
     public $db_name = "rosina_api";
     private $username = "rosina_api";
     private $password = "Abril0204$$";
-
-    // private $host = "db5013159030.hosting-data.io";
-    // public $db_name = "dbs11043805";
-    // private $username = "dbu421658";
-    // private $password = "kA4LCfgGt9ywkB8XU5aY";
+     */
+    
+    public $db_name = "c2261968_rosina";
+    private $username = "c2261968_rosina";
+    private $password = "ru85wokoPO";
 
     public $conn;
 
