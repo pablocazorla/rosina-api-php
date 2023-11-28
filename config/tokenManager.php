@@ -30,9 +30,10 @@ class TokenManager
   {
     $headers = apache_request_headers();
 
-
+    $aaa = 'nada';
 
     if(isset($headers['Authorization'])){
+      $aaa = substr(strstr($headers['Authorization']," "), 1);
       $this->jwt = substr(strstr($headers['Authorization']," "), 1);
     }else{
       $this->jwt = null;
@@ -94,7 +95,8 @@ class TokenManager
       }
     } else {
       return array(
-        "error" => "No token present"
+        "error" => "No token present",
+        "aaa" => $aaa
       );
     }
     //}
