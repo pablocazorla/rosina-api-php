@@ -30,10 +30,16 @@ class TokenManager
   {
     $headers = apache_request_headers();
 
+  //  $aaa = ''
+
+    foreach ($headers as $header => $value) {
+      $aaa .=  "$header: $value <br />\n";
+  }
+
     $aaa = 'nada';
 
     if(isset($headers['Authorization'])){
-      $aaa = $headers['Authorization'];
+    //  $aaa = $headers['Authorization'];
       $this->jwt = substr(strstr($headers['Authorization']," "), 1);
     }else{
       $this->jwt = null;
