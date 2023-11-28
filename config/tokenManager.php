@@ -24,32 +24,18 @@ class TokenManager
   private $issuer = "UQuCChDuTtKZgNs49F5i";
   private $issued_at;
   private $expiration_time;
-  private $aaa;
 
   // constructor
   public function __construct()
   {
     $headers = apache_request_headers();
 
-    $this->aaa = 'headers';
-
-     foreach ($headers as $header => $value) {
-      $this->aaa .=  $header .': ' . $value . ', ';
-  } 
-
-   // $aaa = 'nada';
-
     if(isset($headers['Accesstoken'])){
-    //  $aaa = $headers['Authorization'];
       $this->jwt = $headers['Accesstoken'];//substr(strstr($headers['Accesstoken']," "), 1);
     }else{
       $this->jwt = null;
     }
-
-
-    
-
-
+   
     $this->issued_at = time();
     $this->expiration_time = time() + (60 * 60 * 24 * 365); // 1 hour = 60 * 60 // A year
   }
@@ -94,8 +80,7 @@ class TokenManager
       }
     } else {
       return array(
-        "error" => "No token present ffff",
-        "aaa" => $this->aaa
+        "error" => "No token present",
       );
     }
     //}
