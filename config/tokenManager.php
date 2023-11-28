@@ -32,9 +32,9 @@ class TokenManager
 
    $aaa = 'headers';
 
-    foreach ($headers as $header => $value) {
+/*     foreach ($headers as $header => $value) {
       $aaa .=  $header .': ' . $value . ', ';
-  }
+  } */
 
    // $aaa = 'nada';
 
@@ -101,7 +101,7 @@ class TokenManager
       }
     } else {
       return array(
-        "error" => "No token present dddd",
+        "error" => "No token present eeee",
         "aaa" => $aaa
       );
     }
