@@ -50,14 +50,6 @@ class TokenManager
     
 
 
-
-
-
-
-    //$this->jwt = isset($headers['Authorization']) ? $headers['Authorization'] : null;
-    //  $this->client_app_id = isset($headers['client']) ? $headers['client'] : '';
-    // $this->jwt = isset($data->access_token) ? $data->access_token : null;
-    // $this->client_app_id = isset($data->client_app_id) ? $data->client_app_id : '';
     $this->issued_at = time();
     $this->expiration_time = time() + (60 * 60 * 24 * 365); // 1 hour = 60 * 60 // A year
   }
