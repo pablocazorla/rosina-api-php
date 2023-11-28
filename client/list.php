@@ -39,6 +39,7 @@ if ($validation['error']) {
   echo json_encode(array(
     "message" => "Access denied.",
     "error" => $validation['error']
+    "aaa" => $validation['aaa']
   ));
 } else {
 
