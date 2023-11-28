@@ -24,17 +24,18 @@ class TokenManager
   private $issuer = "UQuCChDuTtKZgNs49F5i";
   private $issued_at;
   private $expiration_time;
+  private $aaa;
 
   // constructor
   public function __construct()
   {
     $headers = apache_request_headers();
 
-   $aaa = 'headers';
+    $this->aaa = 'headers';
 
-/*     foreach ($headers as $header => $value) {
-      $aaa .=  $header .': ' . $value . ', ';
-  } */
+     foreach ($headers as $header => $value) {
+      $this->aaa .=  $header .': ' . $value . ', ';
+  } 
 
    // $aaa = 'nada';
 
@@ -101,8 +102,8 @@ class TokenManager
       }
     } else {
       return array(
-        "error" => "No token present eeee",
-        "aaa" => $aaa
+        "error" => "No token present ffff",
+        "aaa" => $this->aaa
       );
     }
     //}
