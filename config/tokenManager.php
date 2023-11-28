@@ -33,7 +33,7 @@ class TokenManager
     $aaa = 'nada';
 
     if(isset($headers['Authorization'])){
-      $aaa = substr(strstr($headers['Authorization']," "), 1);
+      $aaa = $headers['Authorization'];
       $this->jwt = substr(strstr($headers['Authorization']," "), 1);
     }else{
       $this->jwt = null;
@@ -95,7 +95,7 @@ class TokenManager
       }
     } else {
       return array(
-        "error" => "No token present",
+        "error" => "No token present aaa",
         "aaa" => $aaa
       );
     }
