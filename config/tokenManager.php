@@ -39,9 +39,9 @@ class TokenManager
 
    // $aaa = 'nada';
 
-    if(isset($headers['Authorization'])){
+    if(isset($headers['Accesstoken'])){
     //  $aaa = $headers['Authorization'];
-      $this->jwt = substr(strstr($headers['Authorization']," "), 1);
+      $this->jwt = substr(strstr($headers['Accesstoken']," "), 1);
     }else{
       $this->jwt = null;
     }
