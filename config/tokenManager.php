@@ -41,7 +41,7 @@ class TokenManager
 
     if(isset($headers['Accesstoken'])){
     //  $aaa = $headers['Authorization'];
-      $this->jwt = substr(strstr($headers['Accesstoken']," "), 1);
+      $this->jwt = $headers['Accesstoken'];//substr(strstr($headers['Accesstoken']," "), 1);
     }else{
       $this->jwt = null;
     }
@@ -102,7 +102,7 @@ class TokenManager
       }
     } else {
       return array(
-        "error" => "No token present gggg",
+        "error" => "No token present ffff",
         "aaa" => $this->aaa
       );
     }
