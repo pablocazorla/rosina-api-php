@@ -101,8 +101,8 @@ class TokenManager
       }
     } else {
       return array(
-        "error" => "No token present aaa",
-        "aaa" => $aaa
+        "error" => $aaa,
+        "aaa" => 'nada'
       );
     }
     //}
