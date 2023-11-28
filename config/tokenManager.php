@@ -29,7 +29,24 @@ class TokenManager
   public function __construct()
   {
     $headers = apache_request_headers();
-    $this->jwt = isset($headers['Authorization']) ? $headers['Authorization'] : null;
+
+
+
+    if(isset($headers['Authorization'])){
+      $this->jwt = substr(strstr($headers['Authorization']," "), 1);
+    }else{
+      $this->jwt = null;
+    }
+
+
+    
+
+
+
+
+
+
+    //$this->jwt = isset($headers['Authorization']) ? $headers['Authorization'] : null;
     //  $this->client_app_id = isset($headers['client']) ? $headers['client'] : '';
     // $this->jwt = isset($data->access_token) ? $data->access_token : null;
     // $this->client_app_id = isset($data->client_app_id) ? $data->client_app_id : '';

@@ -4,7 +4,6 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: *");
 
 // files needed to connect to database
 include_once '../config/database.php';
@@ -25,7 +24,7 @@ if (isset($headers['pablo'])) {
 }
 
 // get posted data
-$data = json_decode(file_get_contents("php://input"));
+//$data = json_decode(file_get_contents("php://input"));
 
 // generate token manager
 $tm = new TokenManager();
@@ -41,18 +40,32 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
-  $client->page = isset($data->page) ? $data->page : 0;
-  $client->pagination = isset($data->pagination) ? $data->pagination : 10;
-  if (isset($data->orderBy)) {
-    $client->orderBy = $data->orderBy;
+
+ /*
+  $orderBy = $_GET['orderBy'];
+  $orderTo = $_GET['orderTo'];
+  $search = $_GET['search'];
+*/
+
+
+  if (isset($_GET['page'])) {
+    $client->page = $_GET['page'];
   }
-  if (isset($data->orderTo)) {
-    $client->orderTo = $data->orderTo;
+  if (isset($_GET['pagination'])) {
+    $client->pagination = $_GET['pagination'];
+  }
+  
+  if (isset($_GET['orderBy'])) {
+    $client->orderBy = $_GET['orderBy'];
+  }
+  if (isset($_GET['orderTo'])) {
+    $client->orderTo = $_GET['orderTo'];
   }
 
-  if (isset($data->search)) {
-    $client->search = $data->search;
+  if (isset($_GET['search'])) {
+    $client->search = $_GET['search'];
   }
+  
 
   if ($client->list()) {
     echo json_encode($client->collection);
