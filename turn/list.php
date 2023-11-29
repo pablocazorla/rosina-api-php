@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,client_app_id");
+header("Access-Control-Allow-Headers: *");
 
 // files needed to connect to database
 include_once '../config/database.php';
@@ -19,7 +19,7 @@ $db = $database->getConnection();
 $turn = new Turn($db);
 
 // get posted data
-$data = json_decode(file_get_contents("php://input"));
+/* $data = json_decode(file_get_contents("php://input")); */
 
 // generate token manager
 $tm = new TokenManager();
@@ -35,14 +35,14 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
-  if (isset($data->search)) {
-    $turn->search = $data->search;
+  if (isset($_GET['search'])) {
+    $turn->search = $_GET['search'];
   }
-  if (isset($data->from_day)) {
-    $turn->from_day = $data->from_day;
+  if (isset($_GET['from_day'])) {
+    $turn->from_day = $_GET['from_day'];
   }
-  if (isset($data->to_day)) {
-    $turn->to_day = $data->to_day;
+  if (isset($_GET['to_day'])) {
+    $turn->to_day = $_GET['to_day'];
   }
 
   if ($turn->list()) {

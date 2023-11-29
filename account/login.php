@@ -3,9 +3,8 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
-// header("Access-Control-Max-Age: 3600");
-// header("Access-Control-Allow-Headers: Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization, Client_app_id");
-// header("HTTP/1.1 200 OK");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: *");
 
 // files needed to connect to database
 include_once '../config/database.php';

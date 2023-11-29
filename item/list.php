@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,client_app_id");
+header("Access-Control-Allow-Headers: *");
 
 // files needed to connect to database
 include_once '../config/database.php';
@@ -19,7 +19,7 @@ $db = $database->getConnection();
 $item = new Item($db);
 
 // get posted data
-$data = json_decode(file_get_contents("php://input"));
+/* $data = json_decode(file_get_contents("php://input")); */
 
 // generate token manager
 $tm = new TokenManager();
@@ -35,17 +35,17 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
-  $item->page = isset($data->page) ? $data->page : 0;
-  $item->pagination = isset($data->pagination) ? $data->pagination : 10;
-  if (isset($data->orderBy)) {
-    $item->orderBy = $data->orderBy;
+  $item->page = isset($_GET['page']) ? $_GET['page'] : 0;
+  $item->pagination = isset($_GET['pagination']) ? $_GET['pagination'] : 10;
+  if (isset($_GET['orderBy'])) {
+    $item->orderBy = $_GET['orderBy'];
   }
-  if (isset($data->orderTo)) {
-    $item->orderTo = $data->orderTo;
+  if (isset($_GET['orderTo'])) {
+    $item->orderTo = $_GET['orderTo'];
   }
 
-  if (isset($data->search)) {
-    $item->search = $data->search;
+  if (isset($_GET['search'])) {
+    $item->search = $_GET['search'];
   }
 
   if ($item->list()) {

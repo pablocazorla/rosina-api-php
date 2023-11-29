@@ -55,7 +55,8 @@ class Charge
                 client_name = :client_name,
                 turn_id = :turn_id,
                 status = :status,
-                cost = :cost";
+                cost = :cost,
+                date_created = :date_created";
 
     // prepare the query
     $stmt = $this->conn->prepare($query);
@@ -66,6 +67,7 @@ class Charge
     $this->turn_id = htmlspecialchars(strip_tags($this->turn_id));
     $this->status = htmlspecialchars(strip_tags($this->status));
     $this->cost = htmlspecialchars(strip_tags($this->cost));
+    $this->date_created = htmlspecialchars(strip_tags($this->date_created));
 
     // bind the values
     $stmt->bindParam(':client_id', $this->client_id);
@@ -73,6 +75,7 @@ class Charge
     $stmt->bindParam(':turn_id', $this->turn_id);
     $stmt->bindParam(':status', $this->status);
     $stmt->bindParam(':cost', $this->cost);
+    $stmt->bindParam(':date_created', $this->date_created);
 
     // execute the query, also check if query was successful
     if ($stmt->execute()) {
@@ -172,6 +175,7 @@ class Charge
     $query .= !empty($this->turn_id) ? " turn_id=:turn_id," : "";
     $query .= !empty($this->status) ? " status=:status," : "";
     $query .= !empty($this->cost) ? " cost=:cost," : "";
+    $query .= !empty($this->date_created) ? " date_created=:date_created," : "";
 
     $query = substr($query, 0, -1);
 
@@ -200,6 +204,10 @@ class Charge
     if (!empty($this->cost)) {
       $this->cost = htmlspecialchars(strip_tags($this->cost));
       $stmt->bindParam(':cost', $this->cost);
+    }
+    if (!empty($this->date_created)) {
+      $this->date_created = htmlspecialchars(strip_tags($this->date_created));
+      $stmt->bindParam(':date_created', $this->date_created);
     }
 
     // unique ID of record to be edited

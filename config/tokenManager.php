@@ -33,7 +33,12 @@ class TokenManager
     if(isset($headers['Accesstoken'])){
       $this->jwt = $headers['Accesstoken'];//substr(strstr($headers['Accesstoken']," "), 1);
     }else{
-      $this->jwt = null;
+      if(isset($headers['Authorization'])){
+        $this->jwt = substr(strstr($headers['Authorization']," "), 1);
+      }else{
+        $this->jwt = null;
+      }
+      
     }
    
     $this->issued_at = time();
