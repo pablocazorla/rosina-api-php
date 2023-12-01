@@ -10,15 +10,6 @@ if($method == "OPTIONS") {
     die();
 }
 
-
-
-
-
-
-
-
-
-
 // files needed to connect to database
 include_once '../config/database.php';
 include_once '../config/tokenManager.php';

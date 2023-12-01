@@ -6,11 +6,11 @@ class Database
     // specify your own database credentials
     private $host = "localhost";
 
-    
-   /*  public $db_name = "rosina_api";
+    /*
+    public $db_name = "rosina_api";
     private $username = "rosina_api";
-    private $password = "Abril0204$$"; */
-    
+    private $password = "Abril0204$$";
+    */
     
     public $db_name = "c2261968_rosina";
     private $username = "c2261968_rosina";

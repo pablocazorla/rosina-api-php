@@ -1,11 +1,14 @@
 <?php
 // required headers
-header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: DELETE");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: *");
-
+$method = $_SERVER['REQUEST_METHOD'];
+if($method == "OPTIONS") {
+    die();
+}
 // files needed to connect to database
 include_once '../config/database.php';
 include_once '../config/tokenManager.php';
