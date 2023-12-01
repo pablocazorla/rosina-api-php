@@ -34,7 +34,7 @@ class TokenManager
       $this->jwt = $headers['Accesstoken'];//substr(strstr($headers['Accesstoken']," "), 1);
     }else{
       if(isset($headers['Authorization'])){
-        $this->jwt = substr(strstr($headers['Authorization']," "), 1);
+        $this->jwt = $headers['Authorization'];//substr(strstr($headers['Authorization']," "), 1);
       }else{
         $this->jwt = null;
       }
