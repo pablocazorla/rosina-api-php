@@ -33,32 +33,45 @@ $password = isset($data->password) ? $data->password : "";
 // generate token manager
 $tm = new TokenManager();
 
-// generate jwt will be here
-// check if username exists and if password is correct
-if ($user_exists && password_verify($password, $user->password)) {
+$validation = $tm->validateClientAppId();
 
-    // set response code
-    http_response_code(200);
+if ($validation['error']) {
+  http_response_code(401);
 
-    // generate jwt
-    $jwt = $tm->getTokenByUser($user);
-
-    echo json_encode(
-        array(
-            "message" => "Successful login.",
-            "user" => array(
-                "firstname" => $user->firstname,
-                "lastname" => $user->lastname,
-                "username" => $user->username
-            ),
-            "access_token" => $jwt
-        )
-    );
+  // tell the user access denied  & show error message
+  echo json_encode(array(
+    "message" => "Access denied.",
+    "error" => $validation['error'],
+  ));
 } else {
-    // login failed
-    // set response code
-    http_response_code(401);
 
-    // tell the user login failed
-    echo json_encode(array("message" => "Login failed."));
+    // generate jwt will be here
+    // check if username exists and if password is correct
+    if ($user_exists && password_verify($password, $user->password)) {
+
+        // set response code
+        http_response_code(200);
+
+        // generate jwt
+        $jwt = $tm->getTokenByUser($user);
+
+        echo json_encode(
+            array(
+                "message" => "Successful login.",
+                "user" => array(
+                    "firstname" => $user->firstname,
+                    "lastname" => $user->lastname,
+                    "username" => $user->username
+                ),
+                "access_token" => $jwt
+            )
+        );
+    } else {
+        // login failed
+        // set response code
+        http_response_code(401);
+
+        // tell the user login failed
+        echo json_encode(array("message" => "Login failed."));
+    }
 }

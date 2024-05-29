@@ -40,12 +40,16 @@ class TokenManager
       }
       
     }
+    if(isset($headers['Clientappid'])){
+      $this->client_app_id = $headers['Clientappid'];
+    }
    
     $this->issued_at = time();
-    $this->expiration_time = time() + (60 * 60 * 24 * 365); // 1 hour = 60 * 60 // A year
+    $this->expiration_time = time() + (60 * 60 * 24 * 7); // 1 hour = 60 * 60 // A year
   }
   public function getTokenByUser($user)
   {
+
     $token = array(
       "iat" => $this->issued_at,
       "exp" => $this->expiration_time,
@@ -60,34 +64,46 @@ class TokenManager
     $this->jwt = JWT::encode($token, $this->key);
     return $this->jwt;
   }
-  public function validate()
+  public function validateClientAppId()
   {
-    // if ($this->client_app_id !== $this->current_client_app_id) {
-    // return array(
-    //   "error" => "Invalid client_app_id"
-    // );
-    //  } else {
-
-    if ($this->jwt) {
-      try {
-        // decode jwt
-        $decoded = JWT::decode($this->jwt, $this->key, array('HS256'));
-        return  array(
-          "error" => false,
-          "data" => $decoded->data
-        );
-
-        // $decoded->data;
-      } catch (Exception $e) {
-        return array(
-          "error" => $e->getMessage()
-        );
-      }
-    } else {
+    if ($this->client_app_id !== $this->current_client_app_id) {
       return array(
-        "error" => "No token present",
+        "error" => "Invalid client_app_id"
+      );
+    }else{
+      return  array(
+        "error" => false
       );
     }
-    //}
+  }
+  public function validate()
+  {
+      if ($this->client_app_id !== $this->current_client_app_id) {
+      return array(
+        "error" => "Invalid client_app_id"
+      );
+        } else {
+
+      if ($this->jwt) {
+        try {
+          // decode jwt
+          $decoded = JWT::decode($this->jwt, $this->key, array('HS256'));
+          return  array(
+            "error" => false,
+            "data" => $decoded->data
+          );
+
+          // $decoded->data;
+        } catch (Exception $e) {
+          return array(
+            "error" => $e->getMessage()
+          );
+        }
+      } else {
+        return array(
+          "error" => "No token present",
+        );
+      }
+    }
   }
 }
