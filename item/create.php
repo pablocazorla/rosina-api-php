@@ -1,8 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization, Accesstoken, Clientappid");
+header("Access-Control-Allow-Methods: POST");
+header("Allow: POST");
 header("Content-Type: application/json; charset=UTF-8");
 $method = $_SERVER['REQUEST_METHOD'];
 if($method == "OPTIONS") {
