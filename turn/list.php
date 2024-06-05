@@ -39,9 +39,10 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
+
   if (isset($_GET['search'])) {
     $turn->search = $_GET['search'];
-  }
+  }  
   if (isset($_GET['from_day'])) {
     $turn->from_day = $_GET['from_day'];
   }

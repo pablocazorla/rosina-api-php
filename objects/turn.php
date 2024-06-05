@@ -309,7 +309,7 @@ class Turn
     $search_set = "";
 
     if (!empty($this->search)) {
-      $search_set = " WHERE (p.client_name LIKE ? ) ";
+      $search_set = " WHERE p.client_id = ? ";
     }
     if (!empty($this->from_day)) {
       if (empty($this->search)) {
@@ -327,8 +327,8 @@ class Turn
 
     if (!empty($this->search)) {
       // sanitize
-      $keywords = htmlspecialchars(strip_tags($this->search));
-      $keywords = "%{$keywords}%";
+      $keywords = $this->search;//htmlspecialchars(strip_tags($this->search));
+    //  $keywords = "%{$keywords}%";
 
       // bind
       $stmt->bindParam(1, $keywords);
