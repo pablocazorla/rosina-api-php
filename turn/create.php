@@ -43,8 +43,7 @@ if ($validation['error']) {
   // set product property values
   $turn->client_id = isset($data->client_id) ? $data->client_id : "";
   $turn->client_name = isset($data->client_name) ? $data->client_name : "";
-  $turn->description = isset($data->description) ? $data->description : "";
-  $turn->formula = isset($data->formula) ? $data->formula : "";
+  $turn->description = isset($data->description) ? $data->description : "";  
   $turn->cost = isset($data->cost) ? $data->cost : "";
   $turn->item_ids = isset($data->item_ids) ? $data->item_ids : "";
   $turn->day = isset($data->day) ? $data->day : "";
@@ -52,6 +51,7 @@ if ($validation['error']) {
   $turn->duration = isset($data->duration) ? $data->duration : "";
   $turn->location = isset($data->location) ? $data->location : "";
   $turn->status = isset($data->status) ? $data->status : "";
+  $turn->createdBy = isset($data->formula) ? $data->createdBy : "";
 
   // create the client
   if (
@@ -59,6 +59,7 @@ if ($validation['error']) {
     !empty($turn->day) &&
     !empty($turn->startTime) &&
     !empty($turn->duration) &&
+    !empty($turn->createdBy) &&
     $turn->create()
   ) {
 
@@ -73,7 +74,7 @@ if ($validation['error']) {
           "id" => $turn->id,
           "client_id" => $turn->client_id,
           "client_name" => $turn->client_name,
-          "formula" => $turn->formula,
+          "createdBy" => $turn->createdBy,
           "cost" => $turn->cost,
           "item_ids" => $turn->item_ids,
           "description" => $turn->description,

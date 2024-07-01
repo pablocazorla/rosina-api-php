@@ -56,8 +56,8 @@ if ($validation['error']) {
     if (isset($data->description)) {
       $turn->description = $data->description;
     }
-    if (isset($data->formula)) {
-      $turn->formula = $data->formula;
+    if (isset($data->createdBy)) {
+      $turn->createdBy = $data->createdBy;
     }
     if (isset($data->cost)) {
       $turn->cost = $data->cost;
@@ -98,7 +98,7 @@ if ($validation['error']) {
             "client_id" => $turn->client_id,
             "client_name" => $turn->client_name,
             "description" => $turn->description,
-            "formula" => $turn->formula,
+            "createdBy" => $turn->createdBy,
             "cost" => $turn->cost,
             "item_ids" => $turn->item_ids,
             "day" => $turn->day,

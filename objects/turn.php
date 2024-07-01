@@ -8,7 +8,7 @@ Turn Model:
   client_id: ID
   client_name: VARCHAR(64)
   description: text
-  formula: text [array] 
+  createdBy: text [array] 
   cost: decimal(20,2)
   items_id: text [array] - "id1,id2,id3"
   day: date
@@ -37,7 +37,7 @@ class Turn
   public $client_id;
   public $client_name;
   public $description;
-  public $formula;
+  public $createdBy;
   public $cost;
   public $item_ids;
   public $day;
@@ -66,7 +66,7 @@ class Turn
             SET
             client_id = :client_id,
             client_name = :client_name,
-            formula = :formula,
+            createdBy = :createdBy,
             cost = :cost,
             item_ids = :item_ids,
             description = :description,
@@ -82,7 +82,7 @@ class Turn
     // sanitize
     $this->client_id = htmlspecialchars(strip_tags($this->client_id));
     $this->client_name = htmlspecialchars(strip_tags($this->client_name));
-    $this->formula = htmlspecialchars(strip_tags($this->formula));
+    $this->createdBy = htmlspecialchars(strip_tags($this->createdBy));
     $this->cost = htmlspecialchars(strip_tags($this->cost));
     $this->item_ids = htmlspecialchars(strip_tags($this->item_ids));
     $this->description = htmlspecialchars(strip_tags($this->description));
@@ -95,7 +95,7 @@ class Turn
     // bind the values
     $stmt->bindParam(':client_id', $this->client_id);
     $stmt->bindParam(':client_name', $this->client_name);
-    $stmt->bindParam(':formula', $this->formula);
+    $stmt->bindParam(':createdBy', $this->createdBy);
     $stmt->bindParam(':cost', $this->cost);
     $stmt->bindParam(':item_ids', $this->item_ids);
     $stmt->bindParam(':description', $this->description);
@@ -119,7 +119,7 @@ class Turn
   {
 
     // query to check if start exists
-    $query = "SELECT client_id, client_name, description, formula, cost, item_ids, day, startTime, duration, location, status FROM " . $this->table_name . "
+    $query = "SELECT client_id, client_name, description, createdBy, cost, item_ids, day, startTime, duration, location, status FROM " . $this->table_name . "
           WHERE id = ?
           LIMIT 0,1";
 
@@ -146,7 +146,7 @@ class Turn
       // assign values to object properties      
       $this->client_id = $row['client_id'];
       $this->client_name = $row['client_name'];
-      $this->formula = $row['formula'];
+      $this->createdBy = $row['createdBy'];
       $this->cost = $row['cost'];
       $this->item_ids = $row['item_ids'];
       $this->description = $row['description'];
@@ -204,7 +204,7 @@ class Turn
     $query = "UPDATE " . $this->table_name . " SET";
     $query .= !empty($this->client_id) ? " client_id=:client_id," : "";
     $query .= !empty($this->client_name) ? " client_name=:client_name," : "";
-    $query .= !empty($this->formula) ? " formula=:formula," : "";
+    $query .= !empty($this->createdBy) ? " createdBy=:createdBy," : "";
     $query .= !empty($this->cost) ? " cost=:cost," : "";
     $query .= !empty($this->item_ids) ? " item_ids=:item_ids," : "";
     $query .= !empty($this->description) ? " description=:description," : "";
@@ -230,9 +230,9 @@ class Turn
       $this->client_name = htmlspecialchars(strip_tags($this->client_name));
       $stmt->bindParam(':client_name', $this->client_name);
     }
-    if (!empty($this->formula)) {
-      $this->formula = htmlspecialchars(strip_tags($this->formula));
-      $stmt->bindParam(':formula', $this->formula);
+    if (!empty($this->createdBy)) {
+      $this->createdBy = htmlspecialchars(strip_tags($this->createdBy));
+      $stmt->bindParam(':createdBy', $this->createdBy);
     }
     if (!empty($this->cost)) {
       $this->cost = htmlspecialchars(strip_tags($this->cost));
@@ -320,7 +320,7 @@ class Turn
     }
 
     // select all query
-    $query = "SELECT p.id, p.client_id, p.client_name, p.formula, p.cost, p.item_ids, p.description, p.day, p.startTime, p.duration, p.location, p.status FROM " . $this->table_name . " p " . $search_set . " ORDER BY p.day DESC";
+    $query = "SELECT p.id, p.client_id, p.client_name, p.createdBy, p.cost, p.item_ids, p.description, p.day, p.startTime, p.duration, p.location, p.status FROM " . $this->table_name . " p " . $search_set . " ORDER BY p.day DESC";
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
@@ -387,7 +387,7 @@ class Turn
             "id" => $id,
             "client_id" => $client_id,
             "client_name" => $client_name,
-            "formula" => $formula,
+            "createdBy" => $createdBy,
             "cost" => $cost,
             "item_ids" => $item_ids,
             "description" => $description,

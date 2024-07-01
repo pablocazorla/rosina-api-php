@@ -9,17 +9,21 @@ if($method == "OPTIONS") {
     die();
 }
 
+
 // files needed to connect to database
 include_once '../config/database.php';
 include_once '../config/tokenManager.php';
-include_once '../objects/turn.php';
+include_once '../objects/user.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
 // instantiate user object
-$turn = new Turn($db);
+$user = new User($db);
+
+// get posted data
+/* $data = json_decode(file_get_contents("php://input")); */
 
 // generate token manager
 $tm = new TokenManager();
@@ -35,35 +39,12 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
-  $turn->id = isset($_GET['id']) ? $_GET['id'] : "";
-  if ($turn->setById()) {
-    http_response_code(200);
-
-    // response in json format
-    echo json_encode(
-      array(
-        "message" => "Turn founded.",
-        "data" => array(
-          "id" => $turn->id,
-          "client_id" => $turn->client_id,
-          "client_name" => $turn->client_name,
-          "description" => $turn->description,
-          "createdBy" => $turn->createdBy,
-          "cost" => $turn->cost,
-          "item_ids" => $turn->item_ids,
-          "day" => $turn->day,
-          "startTime" => $turn->startTime,
-          "duration" => $turn->duration,
-          "location" => $turn->location,
-          "status" => $turn->status
-        )
-      )
-    );
+  if ($user->list()) {
+    echo json_encode($user->collection);
   } else {
-    // set response code
-    http_response_code(401);
-
-    // show error message
-    echo json_encode(array("message" => "Turn does not exist."));
+    echo json_encode(array(
+      "message" => "ERROR",
+      //"error" => $validation['error']
+    ));
   }
 }
