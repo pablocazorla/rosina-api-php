@@ -53,6 +53,9 @@ if ($validation['error']) {
     if (isset($data->client_name)) {
       $charge->client_name = $data->client_name;
     }
+    if (isset($data->description)) {
+      $charge->description = $data->description;
+    }
     if (isset($data->turn_id)) {
       $charge->turn_id = $data->turn_id;
     }
@@ -79,6 +82,7 @@ if ($validation['error']) {
             "id" => $charge->id,
             "client_id" => $charge->client_id,
             "client_name" => $charge->client_name,
+            "description" => $charge->description,
             "turn_id" => $charge->turn_id,
             "cost" => $charge->cost,
             "status" => $charge->status,

@@ -44,6 +44,7 @@ if ($validation['error']) {
   // set product property values
   $charge->client_id = isset($data->client_id) ? $data->client_id : "";
   $charge->client_name = isset($data->client_name) ? $data->client_name : "";
+  $charge->description = isset($data->description) ? $data->description : "";
   $charge->turn_id = isset($data->turn_id) ? $data->turn_id : "";
   $charge->status = isset($data->status) ? $data->status : "";
   $charge->cost = isset($data->cost) ? $data->cost : "";
@@ -66,6 +67,7 @@ if ($validation['error']) {
           "id" => $charge->id,
           "client_id" => $charge->client_id,
           "client_name" => $charge->client_name,
+          "description" => $charge->description,
           "turn_id" => $charge->turn_id,
           "status" => $charge->status,
           "cost" => $charge->cost,

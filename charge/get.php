@@ -50,6 +50,7 @@ if ($validation['error']) {
           "id" => $charge->id,
           "client_id" => $charge->client_id,
           "client_name" => $charge->client_name,
+          "description" => $charge->description,
           "turn_id" => $charge->turn_id,
           "status" => $charge->status,
           "cost" => $charge->cost,

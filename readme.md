@@ -3,14 +3,14 @@
 ## User
 
 <pre>
-username: VARCHAR(32)
-firstname: VARCHAR(32)
-lastname: VARCHAR(32)
-email: VARCHAR(128)
-phone: VARCHAR(32)
-password: VARCHAR(2048)
+username: VARCHAR(32) REQUIRED
+firstname: VARCHAR(32) REQUIRED
+lastname: VARCHAR(32) REQUIRED
+email: VARCHAR(128) REQUIRED
+phone: VARCHAR(32) REQUIRED
+password: VARCHAR(2048) REQUIRED
 role: VARCHAR(32)
-created (DEFAULT CURRENT_TIMESTAMP)
+created (DEFAULT CURRENT_TIMESTAMP) NOT EDITABLE
 </pre>
 
 ---
@@ -18,31 +18,17 @@ created (DEFAULT CURRENT_TIMESTAMP)
 ## Turno
 
 <pre>
-client_id: ID
+client_id: ID REQUIRED
 client_name: VARCHAR(64)
+editedBy: text
 description: text
-formula: text [array] // Ej_formula: "tintura|25|silkey|7.2,polvo|15|nomeacuerdo,oxidante|80|iyosey"
 cost: decimal(20,2)
 items_id: text [array] - "id1,id2,id3"
-day: date
-startTime: time
-duration: VARCHAR(8) - max: 9999 minutos
+day: date REQUIRED
+startTime: time REQUIRED
+duration: VARCHAR(8) - max: 9999 minutos REQUIRED
 location: VARCHAR(16) - [ peluquería , gabinete, ambos ]
 status: VARCHAR(16) - [ pending , confirmed , cancelled ]
-</pre>
-
-El color del turno va a estar determinado por el status (pendiente ó confirmado) y la location (peluquería , gabinete, ambos).
-
-### _Fórmula_
-
-<pre>
-type: [ polvo, oxidante , tintura ]
-grams: número gr
-brand: [ silkey , cav , etc. ]
-color_num: número Ej: 7.2 (sólo para tintura)
-
-Ej_formula:
-"tintura|25|silkey|7.2,polvo|15|nomeacuerdo,oxidante|80|iyosey"
 </pre>
 
 ---
@@ -50,12 +36,12 @@ Ej_formula:
 ## Cliente
 
 <pre>
-name: VARCHAR(64)
+name: VARCHAR(64) REQUIRED
 birthday: date
 dni: VARCHAR(10)
 phone: VARCHAR(32)
 phone_contact: VARCHAR(32)
-created (DEFAULT CURRENT_TIMESTAMP)
+created (DEFAULT CURRENT_TIMESTAMP) NOT EDITABLE
 </pre>
 
 ---
@@ -65,12 +51,12 @@ created (DEFAULT CURRENT_TIMESTAMP)
 (Servicios y productos)
 
 <pre>
-name: VARCHAR(64)
-type: VARCHAR(16)
+name: VARCHAR(64) REQUIRED
+type: VARCHAR(16) REQUIRED
 categories: text [array]
 description: text
 cost: decimal(20,2)
-created (DEFAULT CURRENT_TIMESTAMP)
+created (DEFAULT CURRENT_TIMESTAMP) NOT EDITABLE
 </pre>
 
 ---
@@ -81,7 +67,8 @@ created (DEFAULT CURRENT_TIMESTAMP)
 client_id: ID
 client_name: VARCHAR(64)
 turn_id: ID
-cost: decimal(20,2)
-status: VARCHAR(16) - [ pending , confirmed , cancelled ]
+description: text
+cost: decimal(20,2) REQUIRED
+status: VARCHAR(16) - [ pending , completed , cancelled ]
 date_created: datetime
 </pre>

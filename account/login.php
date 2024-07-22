@@ -59,6 +59,7 @@ if ($validation['error']) {
             array(
                 "message" => "Successful login.",
                 "user" => array(
+                    "id" => $user->id,
                     "firstname" => $user->firstname,
                     "lastname" => $user->lastname,
                     "username" => $user->username

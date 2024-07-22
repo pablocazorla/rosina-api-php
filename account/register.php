@@ -10,6 +10,8 @@ if($method == "OPTIONS") {
     die();
 }
 
+$enabled = true;
+
 // files needed to connect to database
 include_once '../config/database.php';
 include_once '../config/config.php';
@@ -34,11 +36,11 @@ $user->phone = isset($data->phone) ? $data->phone : "";
 $user->password = isset($data->password) ? $data->password : "";
 $user->role = isset($data->role) ? $data->role : "USER";
 //
-$client_app_id = isset($data->client_app_id) ? $data->client_app_id : "";
+//$client_app_id = isset($data->client_app_id) ? $data->client_app_id : "";
 
 // create the user
 if (
-  $client_app_id === $client_id_app &&
+  $enabled &&
   !empty($user->username) &&
   !empty($user->firstname) &&
   !empty($user->lastname) &&

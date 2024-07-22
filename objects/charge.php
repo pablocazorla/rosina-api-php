@@ -7,6 +7,7 @@ Charge Model:
   id,
   client_id: INT(11),  
   client_name: text,
+  description: text,
   turn_id: text,
   status: tinyINT(1),
   cost: DECIMAL(20,2),
@@ -26,6 +27,7 @@ class Charge
   public $id;
   public $client_id;
   public $client_name;
+  public $description;
   public $turn_id;
   public $status;
   public $cost;
@@ -53,6 +55,7 @@ class Charge
             SET
                 client_id = :client_id,
                 client_name = :client_name,
+                description = :description,
                 turn_id = :turn_id,
                 status = :status,
                 cost = :cost,
@@ -64,6 +67,7 @@ class Charge
     // sanitize
     $this->client_id = htmlspecialchars(strip_tags($this->client_id));
     $this->client_name = htmlspecialchars(strip_tags($this->client_name));
+    $this->description = htmlspecialchars(strip_tags($this->description));
     $this->turn_id = htmlspecialchars(strip_tags($this->turn_id));
     $this->status = htmlspecialchars(strip_tags($this->status));
     $this->cost = htmlspecialchars(strip_tags($this->cost));
@@ -72,6 +76,7 @@ class Charge
     // bind the values
     $stmt->bindParam(':client_id', $this->client_id);
     $stmt->bindParam(':client_name', $this->client_name);
+    $stmt->bindParam(':description', $this->description);
     $stmt->bindParam(':turn_id', $this->turn_id);
     $stmt->bindParam(':status', $this->status);
     $stmt->bindParam(':cost', $this->cost);
@@ -90,7 +95,7 @@ class Charge
   {
 
     // query to check if id exists
-    $query = "SELECT client_id, client_name, turn_id, status, cost, date_created
+    $query = "SELECT client_id, client_name, description, turn_id, status, cost, date_created
           FROM " . $this->table_name . "
           WHERE id = ?
           LIMIT 0,1";
@@ -118,6 +123,7 @@ class Charge
       // assign values to object properties      
       $this->client_id = $row['client_id'];
       $this->client_name = $row['client_name'];
+      $this->description = $row['description'];
       $this->turn_id = $row['turn_id'];
       $this->status = $row['status'];
       $this->cost = $row['cost'];
@@ -172,6 +178,7 @@ class Charge
     $query = "UPDATE " . $this->table_name . " SET";
     $query .= !empty($this->client_id) ? " client_id=:client_id," : "";
     $query .= !empty($this->client_name) ? " client_name=:client_name," : "";
+    $query .= !empty($this->description) ? " description=:description," : "";
     $query .= !empty($this->turn_id) ? " turn_id=:turn_id," : "";
     $query .= !empty($this->status) ? " status=:status," : "";
     $query .= !empty($this->cost) ? " cost=:cost," : "";
@@ -192,6 +199,10 @@ class Charge
     if (!empty($this->client_name)) {
       $this->client_name = htmlspecialchars(strip_tags($this->client_name));
       $stmt->bindParam(':client_name', $this->client_name);
+    }
+    if (!empty($this->description)) {
+      $this->description = htmlspecialchars(strip_tags($this->description));
+      $stmt->bindParam(':description', $this->description);
     }
     if (!empty($this->turn_id)) {
       $this->turn_id = htmlspecialchars(strip_tags($this->turn_id));
@@ -275,7 +286,7 @@ class Charge
     $search_set = !empty($this->search) ? " WHERE p.client_name LIKE ? " : "";
 
     // select all query
-    $query = "SELECT p.id, p.client_id, p.client_name, p.turn_id, p.status, p.cost, p.date_created FROM " . $this->table_name . " p " . $search_set . "ORDER BY p." . $this->orderBy . " " . $this->orderTo . " LIMIT " . $r_initial . "," . $r_final;
+    $query = "SELECT p.id, p.client_id, p.client_name, p.description, p.turn_id, p.status, p.cost, p.date_created FROM " . $this->table_name . " p " . $search_set . "ORDER BY p." . $this->orderBy . " " . $this->orderTo . " LIMIT " . $r_initial . "," . $r_final;
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
@@ -320,6 +331,7 @@ class Charge
             "id" => $id,
             "client_id" => $client_id,
             "client_name" => $client_name,
+            "description" => $description,
             "turn_id" => $turn_id,
             "status" => $status,
             "cost" => $cost,

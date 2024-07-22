@@ -51,7 +51,7 @@ if ($validation['error']) {
   $turn->duration = isset($data->duration) ? $data->duration : "";
   $turn->location = isset($data->location) ? $data->location : "";
   $turn->status = isset($data->status) ? $data->status : "";
-  $turn->createdBy = isset($data->formula) ? $data->createdBy : "";
+  $turn->editedBy = isset($data->editedBy) ? $data->editedBy : "";
 
   // create the client
   if (
@@ -59,7 +59,7 @@ if ($validation['error']) {
     !empty($turn->day) &&
     !empty($turn->startTime) &&
     !empty($turn->duration) &&
-    !empty($turn->createdBy) &&
+    !empty($turn->editedBy) &&
     $turn->create()
   ) {
 
@@ -74,7 +74,7 @@ if ($validation['error']) {
           "id" => $turn->id,
           "client_id" => $turn->client_id,
           "client_name" => $turn->client_name,
-          "createdBy" => $turn->createdBy,
+          "editedBy" => $turn->editedBy,
           "cost" => $turn->cost,
           "item_ids" => $turn->item_ids,
           "description" => $turn->description,

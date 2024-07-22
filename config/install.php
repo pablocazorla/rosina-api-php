@@ -2,7 +2,7 @@
 
 include_once './database.php';
 
-$enabled = false;
+$enabled = true;
 
 if ($enabled) {
   // get database connection
@@ -28,7 +28,7 @@ if ($enabled) {
 
 
   // TURNS *********************************
-  $query_install_turns = "CREATE TABLE `" . $db_name . "`.`turns` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `client_id` INT(11) NOT NULL , `client_name` VARCHAR(64) NOT NULL , `description` TEXT NOT NULL , `formula` TEXT NOT NULL , `cost` DECIMAL(20,2) NOT NULL DEFAULT '0' , `item_ids` TEXT NOT NULL , `day` DATE NOT NULL , `startTime` TIME NOT NULL , `duration` VARCHAR(8) NOT NULL , `location` VARCHAR(16) NOT NULL , `status` VARCHAR(16) NOT NULL , PRIMARY KEY (`id`))";
+  $query_install_turns = "CREATE TABLE `" . $db_name . "`.`turns` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `client_id` INT(11) NOT NULL , `client_name` VARCHAR(64) NOT NULL , `description` TEXT NOT NULL , `editedBy` VARCHAR(64) NOT NULL , `cost` DECIMAL(20,2) NOT NULL DEFAULT '0' , `item_ids` TEXT NOT NULL , `day` DATE NOT NULL , `startTime` TIME NOT NULL , `duration` VARCHAR(8) NOT NULL , `location` VARCHAR(16) NOT NULL , `status` VARCHAR(16) NOT NULL , PRIMARY KEY (`id`))";
 
   $stmtTurns = $db->prepare($query_install_turns);
 
@@ -61,7 +61,7 @@ if ($enabled) {
   }
 
   // CHARGES ********************************
-  $query_install_charges = "CREATE TABLE `" . $db_name . "`.`charges` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `client_id` INT(11) NOT NULL , `client_name` VARCHAR(64) NOT NULL , `turn_id` INT(11) NOT NULL , `cost` DECIMAL(20,2) NOT NULL DEFAULT '0' , `status` VARCHAR(16) NOT NULL ,`date_created` DATETIME NOT NULL , PRIMARY KEY (`id`))";
+  $query_install_charges = "CREATE TABLE `" . $db_name . "`.`charges` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `client_id` INT(11) NOT NULL , `client_name` VARCHAR(64) NOT NULL , `description` TEXT NOT NULL , `turn_id` INT(11) NOT NULL , `cost` DECIMAL(20,2) NOT NULL DEFAULT '0' , `status` VARCHAR(16) NOT NULL ,`date_created` DATETIME NOT NULL , PRIMARY KEY (`id`))";
 
   $stmtCharges = $db->prepare($query_install_charges);
 

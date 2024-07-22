@@ -22,9 +22,6 @@ $db = $database->getConnection();
 // instantiate user object
 $item = new Item($db);
 
-// get posted data
-$data = json_decode(file_get_contents("php://input"));
-
 // generate token manager
 $tm = new TokenManager();
 
@@ -39,7 +36,7 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
-  $item->id = isset($data->id) ? $data->id : "";
+  $item->id = isset($_GET['id']) ? $_GET['id'] : "";
   $item_exists = $item->existById();
   if ($item_exists && $item->delete()) {
     http_response_code(200);

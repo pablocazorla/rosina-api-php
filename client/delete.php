@@ -22,9 +22,6 @@ $db = $database->getConnection();
 // instantiate user object
 $client = new Client($db);
 
-// get posted data
-$data = json_decode(file_get_contents("php://input"));
-
 // generate token manager
 $tm = new TokenManager();
 
@@ -39,7 +36,7 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
-  $client->id = isset($data->id) ? $data->id : "";
+  $client->id = isset($_GET['id']) ? $_GET['id'] : "";
   $client_exists = $client->existById();
   if ($client_exists && $client->delete()) {
     http_response_code(200);

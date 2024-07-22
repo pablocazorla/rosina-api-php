@@ -56,8 +56,8 @@ if ($validation['error']) {
     if (isset($data->description)) {
       $turn->description = $data->description;
     }
-    if (isset($data->createdBy)) {
-      $turn->createdBy = $data->createdBy;
+    if (isset($data->editedBy)) {
+      $turn->editedBy = $data->editedBy;
     }
     if (isset($data->cost)) {
       $turn->cost = $data->cost;
@@ -69,7 +69,7 @@ if ($validation['error']) {
       $turn->day = $data->day;
     }
     if (isset($data->startTime)) {
-      $visit->startTime = $data->startTime;
+      $turn->startTime = $data->startTime;
     }
     if (isset($data->duration)) {
       $turn->duration = $data->duration;
@@ -98,7 +98,7 @@ if ($validation['error']) {
             "client_id" => $turn->client_id,
             "client_name" => $turn->client_name,
             "description" => $turn->description,
-            "createdBy" => $turn->createdBy,
+            "editedBy" => $turn->editedBy,
             "cost" => $turn->cost,
             "item_ids" => $turn->item_ids,
             "day" => $turn->day,

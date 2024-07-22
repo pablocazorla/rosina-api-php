@@ -21,8 +21,6 @@ $db = $database->getConnection();
 // instantiate user object
 $charge = new Charge($db);
 
-// get posted data
-$data = json_decode(file_get_contents("php://input"));
 
 // generate token manager
 $tm = new TokenManager();
@@ -38,7 +36,7 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
-  $charge->id = isset($data->id) ? $data->id : "";
+  $charge->id = isset($_GET['id']) ? $_GET['id'] : "";
   $charge_exists = $charge->existById();
   if ($charge_exists && $charge->delete()) {
     http_response_code(200);

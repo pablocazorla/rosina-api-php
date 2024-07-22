@@ -264,7 +264,7 @@ class Item
     $r_initial = $this->pagination * $this->page;
     $r_final = $this->pagination;
 
-    $search_set = !empty($this->search) ? " WHERE p.name LIKE ? p.description LIKE ? " : "";
+    $search_set = !empty($this->search) ? " WHERE p.name LIKE ? OR p.description LIKE ? " : "";
 
     // select all query
     $query = "SELECT p.id, p.name, p.description, p.categories, p.type, p.cost, p.created FROM " . $this->table_name . " p " . $search_set . "ORDER BY p." . $this->orderBy . " " . $this->orderTo . " LIMIT " . $r_initial . "," . $r_final;
