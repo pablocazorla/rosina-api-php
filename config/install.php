@@ -2,7 +2,7 @@
 
 include_once './database.php';
 
-$enabled = true;
+$enabled = false;
 
 if ($enabled) {
   // get database connection
