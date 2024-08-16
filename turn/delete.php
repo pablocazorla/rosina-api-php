@@ -22,9 +22,6 @@ $db = $database->getConnection();
 // instantiate user object
 $turn = new Turn($db);
 
-// get posted data
-$data = json_decode(file_get_contents("php://input"));
-
 // generate token manager
 $tm = new TokenManager();
 
@@ -39,7 +36,7 @@ if ($validation['error']) {
     "error" => $validation['error']
   ));
 } else {
-  $turn->id = isset($data->id) ? $data->id : "";
+  $turn->id = isset($_GET['id']) ? $_GET['id'] : "";
   $turn_exists = $turn->existById();
   if ($turn_exists && $turn->delete()) {
     http_response_code(200);
